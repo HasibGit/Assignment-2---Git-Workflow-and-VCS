@@ -14,3 +14,7 @@ function updateUserProfile(profile, updates) {
     updatedAt: new Date(),
   };
 }
+
+function validateEmail(email) {
+  return email.includes('@') && email.includes('.');
+}
