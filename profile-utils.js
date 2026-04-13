@@ -6,3 +6,11 @@ function createUserProfile(name, email) {
     createdAt: new Date(),
   };
 }
+
+function updateUserProfile(profile, updates) {
+  return {
+    ...profile,
+    ...updates,
+    updatedAt: new Date(),
+  };
+}
