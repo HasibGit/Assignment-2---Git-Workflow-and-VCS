@@ -1,46 +1,107 @@
-usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]
-           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
-           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]
-           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]
-           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]
-           <command> [<args>]
+# Task 1: Repository Initialization
 
-These are common Git commands used in various situations:
+First, we are initializing the git repository with “ **git init** ” command.
 
-start a working area (see also: git help tutorial)
-   clone      Clone a repository into a new directory
-   init       Create an empty Git repository or reinitialize an existing one
+![alt text](image.png)
 
-work on the current change (see also: git help everyday)
-   add        Add file contents to the index
-   mv         Move or rename a file, a directory, or a symlink
-   restore    Restore working tree files
-   rm         Remove files from the working tree and from the index
+We have initialized the master branch with a README.md file, created a main branch from
+master and pushed it to origin.
 
-examine the history and state (see also: git help revisions)
-   bisect     Use binary search to find the commit that introduced a bug
-   diff       Show changes between commits, commit and working tree, etc
-   grep       Print lines matching a pattern
-   log        Show commit logs
-   show       Show various types of objects
-   status     Show the working tree status
+![alt text](image-1.png)
 
-grow, mark and tweak your common history
-   backfill   Download missing objects in a partial clone
-   branch     List, create, or delete branches
-   commit     Record changes to the repository
-   merge      Join two or more development histories together
-   rebase     Reapply commits on top of another base tip
-   reset      Reset current HEAD to the specified state
-   switch     Switch branches
-   tag        Create, list, delete or verify a tag object signed with GPG
+We’ve created two branches from master.
 
-collaborate (see also: git help workflows)
-   fetch      Download objects and refs from another repository
-   pull       Fetch from and integrate with another repository or a local branch
-   push       Update remote refs along with associated objects
+![alt text](image-2.png)
 
-'git help -a' and 'git help -g' list available subcommands and some
-concept guides. See 'git help <command>' or 'git help <concept>'
-to read about a specific subcommand or concept.
-See 'git help git' for an overview of the system.
+![alt text](image-3.png)
+
+# Task 2: Branching Workflow
+
+Created 3 more branches for feature and bugfix.
+
+![alt text](image-4.png)
+
+**Merge using “Merge” strategy**
+
+Made some commits to the feature/payment branch. Merged feature/payment branch with main
+branch.
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+As there was no merge conflict, it was a “Fast-forward” merge.
+
+**Merge using “Rebase” strategy**
+
+We have committed some changes in “feature/profile” branch.
+
+![alt text](image-7.png)
+
+Then, we have rebased the feature/profile branch with the main branch.
+
+![alt text](image-8.png)
+
+As a result, the feature/profile branch had all main branch changes.
+
+Then, we merged the main branch with the feature/profile branch. It resulted in a fast-forward merge.
+
+# Task 3: Commit History Management
+
+We have 7 commits in the **develop** branch. We want to re-write the commit history to make it
+more clean and organized before we merge the commits with main.
+
+![alt text](image-9.png)
+
+**Objectives:**
+
+![alt text](image-10.png)
+
+We start rebasing the last 7 commit messages in interactive mode.
+
+![alt text](image-11.png)
+
+The first commit is directly picked without changes.
+
+We update the commit message for the second commit.
+
+![alt text](image-12.png)
+
+The third commit gets dropped.
+
+We fix typo for the fourth commit.
+
+![alt text](image-13.png)
+
+For the last 3 commits, we squash them into one commit with a meaningful commit message.
+
+![alt text](image-14.png)
+
+As a result, in the develop branch, we are left with only 3 commits as a result of re-writing the commit history.
+
+![alt text](image-15.png)
+
+### Merge VS Rebase
+
+| Feature             | Merge                                    | Rebase                                    |
+| ------------------- | ---------------------------------------- | ----------------------------------------- |
+| Basic idea          | Combines two branches with a new commit  | Moves your branch on top of another       |
+| History             | Keeps history as-is (with merge commits) | Rewrites history (linear)                 |
+| Commit graph        | Looks like a tree (branches preserved)   | Looks like a straight line                |
+| New commit created? | Yes (merge commit)                       | No extra commit (commits are reapplied)   |
+| Use case            | Safe for shared branches                 | Cleaner history for feature branches      |
+| Conflicts           | Resolve once during merge                | May need to resolve multiple times        |
+| Risk                | Safe (doesn’t rewrite history)           | Risky if already pushed (history changes) |
+| Command             | `git merge branch-name`                  | `git rebase branch-name`                  |
+
+### Squash & Reword
+
+Both of these terms are related to git rebase.
+
+Using **squash** operation, we can combine (squash) multiple commits into one single commit with a custom commit message.
+
+Use case: Combine multiple redundant/ unnecessary commits into one meaningful commit.
+
+Using **reword** operation, we can update the commit message of some particular commit.
+
+Use case: Fix typo of a commit message or update some commit message to make it more meaningful.
