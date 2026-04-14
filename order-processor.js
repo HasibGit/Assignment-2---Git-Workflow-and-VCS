@@ -7,3 +7,14 @@ function createOrder(userId, items) {
     createdAt: new Date(),
   };
 }
+
+function calculateOrderTotal(items) {
+  return items.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+}
+
+function applyDiscount(total, discountPercent) {
+  if (discountPercent <= 0) return total;
+  return total - (total * discountPercent) / 100;
+}
