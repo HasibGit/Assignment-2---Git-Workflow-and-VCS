@@ -18,3 +18,11 @@ function applyDiscount(total, discountPercent) {
   if (discountPercent <= 0) return total;
   return total - (total * discountPercent) / 100;
 }
+
+function processPayment(order, paymentMethod) {
+  console.log(`Processing payment via ${paymentMethod}...`);
+  return {
+    success: true,
+    transactionId: `TXN-${Date.now()}`,
+  };
+}
